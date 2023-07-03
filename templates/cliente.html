@@ -16,10 +16,11 @@
       <th>Dirección</th>
       <th>Celular</th>
       <th>Email</th>
+      <th>Imagen</th>
       <th>Seleccionar</th>
     </tr>
     </thead>
-    <tbody >
+    <tbody>
     {% for item in data %}
     <tr>
       <td>{{ item.rut }}</td>
@@ -27,6 +28,13 @@
       <td>{{ item.direccion }}</td>
       <td>{{ item.celular }}</td>
       <td>{{ item.email }}</td>
+      <td>
+        {% if item.imagen_producto %}
+        {{ item.imagen_producto }}
+        {% else %}
+        No hay imagen disponible.
+        {% endif %}
+      </td>
       <td><input type="checkbox" name="selected_items" value="{{ item.rut }}"></td>
     </tr>
     {% endfor %}

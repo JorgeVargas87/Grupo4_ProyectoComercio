@@ -11,6 +11,7 @@
         <th>Precio</th>
         <th>Resolución</th>
         <th>Imagen</th>
+        <th>Eliminar</th>
     </tr>
     </thead>
     <tbody >
@@ -21,10 +22,14 @@
         <td>{{ item.precioUnitario }}</td>
         <td>{{ item.resolucion }}</td>
         <td><img src="{{ item.image_url }}"   width="50" height="50" alt=""></td>
+        <td>
+            <form method="POST" action="{% url 'eliminar-monitor' item.idProducto %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+            </form>
+        </td>
     </tr>
     {% endfor %}
     </tbody>
 </table>
-
-
 {% endblock content %}

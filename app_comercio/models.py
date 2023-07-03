@@ -9,10 +9,7 @@ class Producto(models.Model):
     objects = models.Manager()
 
     def image_url(self):
-        if self.imagen_producto and self.imagen_producto.name:
-            return '/media/' + self.imagen_producto.name
-        else:
-            return None
+        return self.imagen_producto.url if self.imagen_producto else None
 
     class Meta:
         abstract = True
@@ -47,12 +44,16 @@ class Cliente(models.Model):
     direccion = models.TextField()
     celular = models.IntegerField()
     email = models.EmailField()
+    imagen_cliente = models.ImageField(null=True, blank=True, upload_to="images/")
     compraMouse = models.ManyToManyField(Mouse, blank=True)
     compraComputador = models.ManyToManyField(Computador, blank=True)
     compraMonitor = models.ManyToManyField(Monitor, blank=True)
     selected = models.BooleanField(default=False)
 
     objects = models.Manager()
+
+    def image_url(self):
+        return self.imagen_cliente.url if self.imagen_cliente else None
 
     def __str__(self):
         return str(self.rut) + " - " + self.nombre

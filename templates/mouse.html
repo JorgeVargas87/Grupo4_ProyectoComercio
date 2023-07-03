@@ -10,19 +10,33 @@
         <th>Marca</th>
         <th>Precio</th>
         <th>Wireless</th>
+        <th>Imagen</th>
+        <th>Eliminar</th>
 
     </tr>
     </thead>
-    <tbody >
+    <tbody>
     {% for item in data %}
     <tr>
         <td>{{ item.idProducto }}</td>
         <td>{{ item.marca }}</td>
         <td>{{ item.precioUnitario }}</td>
         <td>{{ item.wireless }}</td>
+        <td>
+            {% if item.imagen_producto %}
+            <img src="{{ item.imagen_producto.url }}" alt="{{ item.marca }}" width="50" height="50">
+            {% else %}
+            No hay imagen disponible.
+            {% endif %}
+        </td>
+        <td>
+            <form method="POST" action="{% url 'eliminar-mouse' item.idProducto %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+            </form>
+        </td>
     </tr>
     {% endfor %}
     </tbody>
 </table>
-
 {% endblock content %}

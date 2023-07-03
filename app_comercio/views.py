@@ -188,3 +188,44 @@ class ClientOptionsView(View):
         options = [{'rut': option.rut, 'name': option.nombre} for option in client_options]
         return JsonResponse({'options': options})
 
+
+class DeleteMouseView(View):
+    template_name = 'mouse.html'
+    success_url = 'mouse'
+
+    def post(self, request, pk):
+        mouse = Mouse.objects.get(pk=pk)
+        mouse.delete()
+
+        return redirect(self.success_url)
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+
+class DeleteComputadorView(View):
+    template_name = 'computador.html'
+    success_url = 'computador'
+
+    def post(self, request, pk):
+        computador = Computador.objects.get(pk=pk)
+        computador.delete()
+
+        return redirect(self.success_url)
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+
+class DeleteMonitorView(View):
+    template_name = 'monitor.html'
+    success_url = 'monitor'
+
+    def post(self, request, pk):
+        monitor = Monitor.objects.get(pk=pk)
+        monitor.delete()
+
+        return redirect(self.success_url)
+
+    def get(self, request):
+        return render(request, self.template_name)

@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import AboutPageView, ClientePageView, HomePageView, AddClientePageView, MonitorPageView, \
     AddComputadorPageView, MousePageView, ComputadorPageView, AddMonitorPageView, AddMousePageView, DeleteClientView, \
-    ProductOptionsView, ClientOptionsView, CompraPageView
+    ProductOptionsView, ClientOptionsView, CompraPageView, DeleteMouseView, DeleteComputadorView, DeleteMonitorView
 
 urlpatterns = [
     path('', HomePageView.as_view(), name='home'),
@@ -18,4 +18,7 @@ urlpatterns = [
     path('get_client_options/', ClientOptionsView.as_view(), name='get_client_options'),
     path('Compra/', CompraPageView.as_view(), name='compra'),
     path('cliente/', DeleteClientView.as_view(), name='delete_data'),
+    path('monitor/<int:pk>/eliminar/', DeleteMonitorView.as_view(), name='eliminar-monitor'),  # Nueva URL para eliminar monitor
+    path('computador/<int:pk>/eliminar/', DeleteComputadorView.as_view(), name='eliminar-computador'),  # Nueva URL para eliminar computador
+    path('mouse/<int:pk>/eliminar/', DeleteMouseView.as_view(), name='eliminar-mouse'),  # Nueva URL para eliminar mouse
 ]

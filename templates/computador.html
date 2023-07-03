@@ -12,10 +12,12 @@
         <th>CPU</th>
         <th>Memoria RAM</th>
         <th>Almacenamiento</th>
+        <th>Imagen</th>
+        <th>Eliminar</th>
 
     </tr>
     </thead>
-    <tbody >
+    <tbody>
     {% for item in data %}
     <tr>
         <td>{{ item.idProducto }}</td>
@@ -24,9 +26,21 @@
         <td>{{ item.cpu }}</td>
         <td>{{ item.ram }}</td>
         <td>{{ item.hdd }}</td>
+        <td>
+            {% if item.imagen_producto %}
+            <img src="{{ item.imagen_producto.url }}" alt="{{ item.marca }}" width="50" height="50">
+            {% else %}
+            No hay imagen disponible.
+            {% endif %}
+        </td>
+        <td>
+            <form method="POST" action="{% url 'eliminar-computador' item.idProducto %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+            </form>
+        </td>
     </tr>
     {% endfor %}
     </tbody>
 </table>
-
 {% endblock content %}
